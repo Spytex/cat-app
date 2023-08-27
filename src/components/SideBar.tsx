@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import SideBarButton from "./buttons/SideBarButton";
+import SideBarButton from "./buttons/sideMenu/SideBarButton";
 import Logo from "./Logo";
 import { usePathname } from "next/navigation";
 
@@ -30,7 +30,7 @@ const SideBar: React.FC = () => {
   ];
 
   return (
-    <div className={"px-[147px] fixed"}>
+    <div className={"ml-[147px] fixed"}>
       <div className="mb-[80px] mt-[30px]">
         <Logo />
       </div>

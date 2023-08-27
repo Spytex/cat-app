@@ -2,9 +2,8 @@
 
 import React, { useState } from "react";
 import Search from "./Search";
-import LinkButton from "../buttons/LinkButton";
 import { usePathname } from "next/navigation";
-import MenuButton from "../buttons/MenuButton";
+import MenuButton from "../buttons/sideMenu/MenuButton";
 
 export type SearchRowProps = {
   onSearch: (value: string) => void;

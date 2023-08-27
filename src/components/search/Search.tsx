@@ -9,9 +9,6 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
   const [value, setValue] = useState("");
   const [isHovered, setIsHovered] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const [placeholderValue, setPlaceholderValue] = useState(
-    "Search for breeds by name"
-  );
 
   const searchHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
@@ -29,28 +26,23 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
       <input
         type="search"
         name="search"
-        placeholder={placeholderValue}
+        placeholder="Search for breeds by name"
         className={`bg-white h-[60px] px-[20px] w-full rounded-[20px] text-[20px] leading-[30px] font-normal border-[2px]
-        ${!isHovered && !isActive ? "border-white" : ""}
-        ${isHovered && !isActive ? "border-pink-100" : ""}
-        ${isActive ? "outline-none border-pink-200" : ""}`}
+        ${!isHovered && !isActive ? "border-white placeholder-gray-200" : ""}
+        ${isHovered && !isActive ? "border-pink-100 placeholder-white" : ""}
+        ${isActive ? "outline-none border-pink-200 placeholder-white" : ""}`}
         onChange={(event) => searchHandler(event)}
         onKeyDown={handleKeyDown}
         onFocus={() => setIsActive(true)}
         onBlur={() => {
-          setPlaceholderValue("Search for breeds by name");
           if (value === "") {
             setIsActive(false);
           }
         }}
-        onMouseEnter={() => {
-          setPlaceholderValue("");
+        onMouseOver={() => {
           setIsHovered(true);
         }}
-        onMouseLeave={() => {
-          if (isActive === false) {
-            setPlaceholderValue("Search for breeds by name");
-          }
+        onMouseOut={() => {
           setIsHovered(false);
         }}
       />

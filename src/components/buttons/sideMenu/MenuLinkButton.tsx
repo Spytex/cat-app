@@ -1,27 +1,31 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 
 interface ButtonProps {
+  isHovered: boolean;
   isActive: boolean;
   href: string;
   height?: string;
   width?: string;
   rounded?: string;
   children: React.ReactNode;
+  onMouseOver: () => void;
+  onMouseOut: () => void;
 }
 
-const LinkButton: React.FC<ButtonProps> = ({
+const MenuLinkButton: React.FC<ButtonProps> = ({
+  isHovered,
   isActive,
   href,
   height,
   width,
   rounded,
   children,
+  onMouseOver,
+  onMouseOut,
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
-  
   return (
     <Link
       className={`${height} ${width} ${rounded} font-medium text-[12px] leading-[16px] tracking-[2px] flex justify-center items-center duration-200 
@@ -32,8 +36,8 @@ const LinkButton: React.FC<ButtonProps> = ({
           ? "bg-pink-200 text-white fill-white"
           : "text-pink-200 fill-pink-200"
       }`}
-      onMouseOver={() => setIsHovered(true)}
-      onMouseOut={() => setIsHovered(false)}
+      onMouseOver={() => onMouseOver()}
+      onMouseOut={() => onMouseOut()}
       href={href}
     >
       {children}
@@ -41,4 +45,4 @@ const LinkButton: React.FC<ButtonProps> = ({
   );
 };
 
-export default LinkButton;
+export default MenuLinkButton;

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import LinkButton from "./LinkButton";
+import MenuLinkButton from "./MenuLinkButton";
 
 interface SideBarButtonProps {
   isActive: boolean;
@@ -18,18 +18,18 @@ const SideBarButton: React.FC<SideBarButtonProps> = ({
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <LinkButton
+    <MenuLinkButton
       isHovered={isHovered}
       isActive={isActive}
       href={href}
       height={"h-[60px]"}
       width={"w-[60px]"}
       rounded={"rounded-[20px]"}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseOver={() => setIsHovered(true)}
+      onMouseOut={() => setIsHovered(false)}
     >
       {children}
-    </LinkButton>
+    </MenuLinkButton>
   );
 };
 
