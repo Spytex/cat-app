@@ -1,38 +1,45 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import Button from "./buttons/Button";
+import Button from "../buttons/Button";
 import ContentBox from "./ContentBox";
-import LinkButton from "./buttons/LinkButton";
-import DropdownMenu from "./DropdownMenu";
-import GridPattern from "./GridPattern";
-
+import LinkButton from "../buttons/LinkButton";
+import DropdownMenu from "../DropdownMenu";
+import GridPattern from "../GridPattern";
+import { useCatContext } from "@/context/CatContext";
 
 const BreedsContent: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const breeds = [
-    "Affenpinscher",
-    "Afghan Hound",
-    "Airedale Terrier",
-    "Akita",
-    "Alaskan Malamute",
-    "American English Coonhound",
-    "American Eskimo Dog",
-    "American Foxhound",
-    "American Pit Bull Terrier",
-    "American Water Spaniel",
-    "Anatolian Shepherd Dog",
-    "Appenzeller Sennenhunde",
-    "Australian Cattle Dog",
-    "Australian Shepherd",
-    "Australian Terrier",
-    "Azawakh",
-    // ... more breeds
+  const { catData, catBreeds, fetchCatSearch, fetchCatBreeds } =
+    useCatContext();
+
+  const [gridLimit, setGridLimit] = useState("10");
+  const [breedId, setBreedId] = useState("");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    Promise.all([fetchCatSearch(gridLimit, breedId), fetchCatBreeds()])
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setIsLoading(false);
+      });
+  }, [gridLimit, breedId]);
+
+  const breeds = catBreeds;
+
+  const limits = [
+    { id: "5", name: "5" },
+    { id: "10", name: "10" },
+    { id: "15", name: "15" },
+    { id: "20", name: "20" },
   ];
-  const limits = ["5", "10", "15", "20"];
 
   return (
     <ContentBox>
@@ -62,10 +69,13 @@ const BreedsContent: React.FC = () => {
         </Button>
         <LinkButton
           isActive={pathname === "/breeds"}
-          href={"/breeds"}
-          height={"h-[40px]"}
+          href="/breeds"
+          height="h-[40px]"
           width="w-[143px]"
-          rounded={"rounded-[10px]"}
+          rounded="rounded-[10px]"
+          fontWeight="font-medium"
+          fontSize="text-[20px]"
+          leading="leading-[30px]"
         >
           BREEDS
         </LinkButton>
@@ -78,7 +88,7 @@ const BreedsContent: React.FC = () => {
           defaultTextColor="text-gray-200"
           data={breeds}
           onClick={(value) => {
-            console.log(value);
+            setBreedId(value);
           }}
         />
         <DropdownMenu
@@ -87,11 +97,11 @@ const BreedsContent: React.FC = () => {
           defaultBgColor="bg-gray-100"
           rounded="rounded-[10px]"
           allListPlaceholder="Limit: "
-          defaulValue="10"
+          defaulValue={gridLimit}
           defaultTextColor="text-gray-200"
           data={limits}
           onClick={(value) => {
-            console.log(value);
+            setGridLimit(value);
           }}
         />
         <Button
@@ -103,7 +113,9 @@ const BreedsContent: React.FC = () => {
           hoverBgColor="bg-gray-100"
           hoverFillColor="fill-pink-200"
           className="border-[2px] border-transparent hover:border-pink-100"
-          onClick={() => {}}
+          onClick={() => {
+            setSortOrder("desc");
+          }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -127,7 +139,9 @@ const BreedsContent: React.FC = () => {
           hoverBgColor="bg-gray-100"
           hoverFillColor="fill-pink-200"
           className="border-[2px] border-transparent hover:border-pink-100"
-          onClick={() => {}}
+          onClick={() => {
+            setSortOrder("asc");
+          }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -143,7 +157,11 @@ const BreedsContent: React.FC = () => {
           </svg>
         </Button>
       </div>
-      <GridPattern images={["https://t3.ftcdn.net/jpg/02/95/94/94/360_F_295949484_8BrlWkTrPXTYzgMn3UebDl1O13PcVNMU.jpg", "2", "3", "https://wallpaperaccess.com/full/255883.jpg", "5", "6", "7", "8", "9", "10"]} />
+      {isLoading ? (
+        <div className="text-center p-4">Loading...</div>
+      ) : (
+        <GridPattern catData={catData} sortOrder={sortOrder} />
+      )}
     </ContentBox>
   );
 };

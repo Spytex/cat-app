@@ -1,45 +1,156 @@
+import { useCatContext } from "@/context/CatContext";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 interface GridPatternProps {
-  images: string[];
+  catData: {
+    breeds: {
+      id: string;
+      name: string;
+    }[];
+    categories: string;
+    id: string;
+    url: string;
+    width: number;
+    height: number;
+  }[];
+  sortOrder?: "asc" | "desc";
 }
 
-const GridPattern: React.FC<GridPatternProps> = ({ images }) => {
+const GridPattern: React.FC<GridPatternProps> = ({
+  catData,
+  sortOrder = "asc",
+}) => {
+  const { setCatImageURL } = useCatContext();
+
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   const gridItems = [
-    { width: "200px", height: "300px", rowSpan: "2", colSpan: "1" },
-    { width: "200px", height: "140px", rowSpan: "1", colSpan: "1" },
-    { width: "200px", height: "140px", rowSpan: "1", colSpan: "1" },
-    { width: "420px", height: "300px", rowSpan: "2", colSpan: "2" },
-    { width: "200px", height: "140px", rowSpan: "1", colSpan: "1" },
-    { width: "200px", height: "140px", rowSpan: "1", colSpan: "1" },
-    { width: "200px", height: "140px", rowSpan: "1", colSpan: "1" },
-    { width: "200px", height: "300px", rowSpan: "2", colSpan: "1" },
-    { width: "420px", height: "300px", rowSpan: "2", colSpan: "2" },
-    { width: "200px", height: "140px", rowSpan: "1", colSpan: "1" },
+    {
+      width: "w-[200px]",
+      height: "h-[300px]",
+      rowSpan: "row-span-2",
+      colSpan: "col-span-1",
+    },
+    {
+      width: "w-[200px]",
+      height: "h-[140px]",
+      rowSpan: "row-span-1",
+      colSpan: "col-span-1",
+    },
+    {
+      width: "w-[200px]",
+      height: "h-[140px]",
+      rowSpan: "row-span-1",
+      colSpan: "col-span-1",
+    },
+    {
+      width: "w-[420px]",
+      height: "h-[300px]",
+      rowSpan: "row-span-2",
+      colSpan: "col-span-2",
+    },
+    {
+      width: "w-[200px]",
+      height: "h-[140px]",
+      rowSpan: "row-span-1",
+      colSpan: "col-span-1",
+    },
+    {
+      width: "w-[200px]",
+      height: "h-[140px]",
+      rowSpan: "row-span-1",
+      colSpan: "col-span-1",
+    },
+    {
+      width: "w-[200px]",
+      height: "h-[140px]",
+      rowSpan: "row-span-1",
+      colSpan: "col-span-1",
+    },
+    {
+      width: "w-[200px]",
+      height: "h-[300px]",
+      rowSpan: "row-span-2",
+      colSpan: "col-span-1",
+    },
+    {
+      width: "w-[420px]",
+      height: "h-[300px]",
+      rowSpan: "row-span-2",
+      colSpan: "col-span-2",
+    },
+    {
+      width: "w-[200px]",
+      height: "h-[140px]",
+      rowSpan: "row-span-1",
+      colSpan: "col-span-1",
+    },
   ];
+
+  let sortedCatData = [...catData];
+  if (sortedCatData.length > 0) {
+    sortedCatData = sortedCatData.sort((a, b) => {
+      const nameA = a.breeds[0].name.toLowerCase();
+      const nameB = b.breeds[0].name.toLowerCase();
+
+      if (sortOrder === "asc") {
+        return nameA.localeCompare(nameB);
+      } else {
+        return nameB.localeCompare(nameA);
+      }
+    });
+  }
 
   return (
     <div className="grid grid-cols-3 gap-[20px]">
-      {images.map((url, index) => (
+      {sortedCatData.map((data, index) => (
         <div
-          className={`bg-gray-100 rounded-[20px] w-[${
-            gridItems[index % 10].width
-          }] h-[${gridItems[index % 10].height}] row-span-${
-            gridItems[index % 10].rowSpan
-          } col-span-${gridItems[index % 10].colSpan}`}
+          key={index}
+          className={`bg-gray-100 rounded-[20px]  ${
+            gridItems[index % 10].height
+          } ${gridItems[index % 10].width} ${gridItems[index % 10].rowSpan} ${
+            gridItems[index % 10].colSpan
+          } relative`}
+          onMouseOver={() => setHoveredIndex(index)}
+          onMouseOut={() => setHoveredIndex(null)}
         >
-          <Link href={`/breeds/${index}`}>
-            <img
-              src={url}
-              alt="Grid Item"
-              className="rounded-[20px] w-full h-full object-cover object-center"
-            />
-          </Link>
+          <img
+            src={data.url}
+            alt="Grid Item"
+            className="rounded-[20px] w-full h-full object-cover object-center "
+          />
+          {hoveredIndex === index && (
+            <div>
+              <Link
+                href={`/breeds/${data.breeds[0].id}`}
+                className="absolute inset-0 flex items-end justify-center bg-pink-200 opacity-60 rounded-[20px]"
+                onClick={() =>
+                  setCatImageURL({
+                    id: data.breeds[0].id,
+                    url: data.url,
+                  })
+                }
+              ></Link>
+              <Link
+                href={`/breeds/${data.breeds[0].id}`}
+                className="absolute inset-0 flex items-end justify-center rounded-[20px]"
+                onClick={() =>
+                  setCatImageURL({
+                    id: data.breeds[0].id,
+                    url: data.url,
+                  })
+                }
+              >
+                <div className="inset-0 flex items-center justify-center w-full h-[34px] bg-white text-pink-200 text-[16px] font-normal leading-[24px] rounded-[10px] m-[10px]">
+                  {data.breeds[0].name}
+                </div>
+              </Link>
+            </div>
+          )}
         </div>
       ))}
     </div>
   );
 };
-
 export default GridPattern;

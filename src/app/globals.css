@@ -13,3 +13,7 @@
 body {
   font-family: Jost;
 }
+
+html {
+  overflow-y: scroll;
+}

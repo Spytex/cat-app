@@ -1,11 +1,7 @@
-import BreedsContent from "@/components/BreedsContent";
+import BreedsContent from "@/components/content/BreedsContent";
 
 const Dislikes = () => {
-  return (
-    <div className="flex justify-end">
-      <BreedsContent />
-    </div>
-  );
+  return <div className="flex justify-end"></div>;
 };
 
 export default Dislikes;

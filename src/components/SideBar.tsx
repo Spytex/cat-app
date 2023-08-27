@@ -30,7 +30,7 @@ const SideBar: React.FC = () => {
   ];
 
   return (
-    <div className={"ml-[147px] fixed"}>
+    <div className={"ml-[147px] h-screen sticky top-0"}>
       <div className="mb-[80px] mt-[30px]">
         <Logo />
       </div>

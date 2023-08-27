@@ -9,6 +9,10 @@ interface ButtonProps {
   height?: string;
   width?: string;
   rounded?: string;
+  fontSize?: string;
+  fontWeight?: string;
+  leading?: string;
+  defaultBgColor?: string;
   children: React.ReactNode;
 }
 
@@ -18,14 +22,18 @@ const LinkButton: React.FC<ButtonProps> = ({
   height,
   width,
   rounded,
+  fontSize="text-[12px]",
+  fontWeight="font-medium",
+  leading="leading-[16px]",
+  defaultBgColor = "bg-white",
   children,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   
   return (
     <Link
-      className={`${height} ${width} ${rounded} font-medium text-[12px] leading-[16px] tracking-[2px] flex justify-center items-center duration-200 
-      ${!isActive && !isHovered ? "bg-white" : ""}
+      className={`${height} ${width} ${rounded} ${fontSize} ${fontWeight} ${leading} tracking-[2px] flex justify-center items-center duration-200 
+      ${!isActive && !isHovered ? defaultBgColor : ""}
       ${isHovered && !isActive ? "bg-pink-100" : ""} 
       ${
         isActive

@@ -11,7 +11,7 @@ interface DropdownMenuProps {
   defaulValue?: string;
   defaultBgColor?: string;
   defaultTextColor?: string;
-  data: string[];
+  data: { id: string; name: string }[];
   onClick: (value: string) => void;
 }
 
@@ -34,22 +34,22 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
     setMenuVisible(!menuVisible);
   };
 
-  const handleOptionSelect = (option: React.SetStateAction<string>) => {
-    if (option === selected) {
-      setSelected(defaulValue);
-      toggleMenu();
-    } else {
-      setSelected(option);
-    }
-
+  const handleOptionSelect = (name: string, id: string) => {
     toggleMenu();
+    if (name === selected) {
+      setSelected(defaulValue);
+      return defaulValue;
+    } else {
+      setSelected(name);
+      return id;
+    }
   };
 
   return (
     <div className={`${width} relative`}>
       <div>
         <button
-          className={`inline-flex justify-between items-center w-full ${height} px-[10px] text-[16px] font-normal leading-[24px] ${defaultTextColor} ${defaultBgColor} ${rounded} border-[2px] border-transparent hover:border-pink-100`}
+          className={`inline-flex justify-between items-center outline-none w-full ${height} px-[10px] text-[16px] font-normal leading-[24px] ${defaultTextColor} ${defaultBgColor} ${rounded} border-[2px] border-transparent hover:border-pink-100`}
           onClick={toggleMenu}
         >
           {selected === ""
@@ -85,20 +85,20 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
         </button>
       </div>
       {menuVisible && (
-        <div className="absolute max-h-[200px] overflow-y-auto right-0 w-full mt-2 origin-top-right font-normal leading-[24px] bg-white divide-y divide-gray-100 rounded-lg ring-1 ring-gray-100">
+        <div className="absolute z-10 max-h-[200px] overflow-y-auto right-0 w-full mt-2 origin-top-right font-normal leading-[24px] bg-white divide-y divide-gray-100 rounded-lg ring-1 ring-gray-100">
           <div className="px-1 py-1">
             {data.map((option) => (
               <button
-                key={option}
+                key={option.id}
                 className={`text-black group flex rounded-md items-center w-full px-2 py-2 text-[16px] ${
-                  option === selected ? "bg-gray-100" : ""
+                  option.name === selected ? "bg-gray-100" : ""
                 }`}
                 onClick={() => {
-                  handleOptionSelect(option);
-                  onClick(option);
+                  const value = handleOptionSelect(option.name, option.id);
+                  onClick(value);
                 }}
               >
-                {allListPlaceholder + option}
+                {allListPlaceholder + option.name}
               </button>
             ))}
           </div>
