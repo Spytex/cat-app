@@ -1,15 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Search from "./Search";
 import { usePathname } from "next/navigation";
 import MenuButton from "../buttons/sideMenu/MenuButton";
 
-export type SearchRowProps = {
-  onSearch: (value: string) => void;
-};
-
-const SearchRow: React.FC<SearchRowProps> = ({ onSearch }) => {
+const SearchRow: React.FC = () => {
   const pathname = usePathname();
 
   const navLinks = [
@@ -72,11 +68,7 @@ const SearchRow: React.FC<SearchRowProps> = ({ onSearch }) => {
   return (
     <div className="flex flex-row space-x-[10px]">
       <div className="w-[470px]">
-        <Search
-          onSearch={(value: string) => {
-            onSearch(value);
-          }}
-        />
+        <Search />
       </div>
       {navLinks.map(({ name, link, svgPath }) => (
         <MenuButton key={name} isActive={pathname === link} href={link}>

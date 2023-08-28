@@ -1,17 +1,7 @@
 "use client";
 
-import SearchRow from "@/components/search/SearchRow";
-
 const Likes = () => {
-  return (
-    <div className="flex justify-end">
-      <SearchRow
-        onSearch={(value: string) => {
-          console.log(value);
-        }}
-      />
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Likes;

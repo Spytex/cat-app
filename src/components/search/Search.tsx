@@ -1,14 +1,28 @@
 "use client";
+
+import { useCatContext } from "@/context/CatContext";
+import { useRouter } from "next/navigation";
 import React, { ChangeEvent, useState } from "react";
 
-export type SearchProps = {
-  onSearch: (value: string) => void;
-};
+const Search: React.FC = () => {
+  const router = useRouter();
 
-const Search: React.FC<SearchProps> = ({ onSearch }) => {
+  const { fetchCatSearch, catBreeds } = useCatContext();
+
   const [value, setValue] = useState("");
   const [isHovered, setIsHovered] = useState(false);
   const [isActive, setIsActive] = useState(false);
+
+  const handleSearch = async (value: string) => {
+    const breed = catBreeds.find((breed) =>
+      breed.name.toLowerCase().includes(value.toLowerCase())
+    );
+
+    if (breed) {
+      router.push(`/breeds/${breed.id}`);     // temporary /breeds/${breed.id} instead of /search?id=${breed.id}
+      fetchCatSearch(undefined, breed.id);
+    }
+  };
 
   const searchHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const { target } = event;
@@ -17,7 +31,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      onSearch(value);
+      handleSearch(value);
     }
   };
 
@@ -48,7 +62,7 @@ const Search: React.FC<SearchProps> = ({ onSearch }) => {
       />
       <button
         type="submit"
-        onClick={() => onSearch(value)}
+        onClick={() => handleSearch(value)}
         className="absolute right-0 top-0 mt-[10px] mr-[10px] w-[40px] h-[40px] fill-pink-200 bg-pink-100 flex justify-center items-center rounded-[10px] hover:bg-pink-200 hover:fill-white"
       >
         <svg
