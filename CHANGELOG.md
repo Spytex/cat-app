@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/Spytex/cat-app/compare/v0.1.4...v0.1.5) (2023-08-28)
+
+
+### Bug Fixes
+
+* Fixed components ([c9b32e9](https://github.com/Spytex/cat-app/commit/c9b32e93a5504d9e1cd728c4cebc4420d995bb59))
+
 ### [0.1.4](https://github.com/Spytex/cat-app/compare/v0.1.3...v0.1.4) (2023-08-28)
 
 
