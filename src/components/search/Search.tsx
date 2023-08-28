@@ -2,16 +2,24 @@
 
 import { useCatContext } from "@/context/CatContext";
 import { useRouter } from "next/navigation";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 
 const Search: React.FC = () => {
   const router = useRouter();
 
-  const { fetchCatSearch, catBreeds } = useCatContext();
+  const { fetchCatBreeds, catBreeds } = useCatContext();
 
   const [value, setValue] = useState("");
   const [isHovered, setIsHovered] = useState(false);
   const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    fetchCatBreeds();
+  }, []);
+
+  const breedSuggestions = catBreeds
+    .filter((breed) => breed.name.toLowerCase().includes(value.toLowerCase()))
+    .slice(0, 5);
 
   const handleSearch = async (value: string) => {
     const breed = catBreeds.find((breed) =>
@@ -19,8 +27,7 @@ const Search: React.FC = () => {
     );
 
     if (breed) {
-      router.push(`/breeds/${breed.id}`);     // temporary /breeds/${breed.id} instead of /search?id=${breed.id}
-      fetchCatSearch(undefined, breed.id);
+      router.push(`/breeds/${breed.id}`); // temporary /breeds/${breed.id} instead of /search?id=${breed.id}
     }
   };
 
@@ -60,6 +67,25 @@ const Search: React.FC = () => {
           setIsHovered(false);
         }}
       />
+
+      {isActive && value != "" && breedSuggestions.length > 0 && (
+        <div className="absolute w-full bg-white border border-gray-300 rounded-[20px] z-30 mt-1">
+          {breedSuggestions.map((breed) => (
+            <div
+              key={breed.id}
+              className="px-4 py-2 cursor-pointer hover:bg-gray-100 rounded-[20px] "
+              onClick={() => {
+                setValue(breed.name);
+                setIsActive(false);
+                handleSearch(breed.name); // Automatically search for selected breed
+              }}
+            >
+              {breed.name}
+            </div>
+          ))}
+        </div>
+      )}
+
       <button
         type="submit"
         onClick={() => handleSearch(value)}
