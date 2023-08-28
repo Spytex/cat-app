@@ -90,16 +90,19 @@ const GridPattern: React.FC<GridPatternProps> = ({
 
   let sortedCatData = [...catData];
   if (sortedCatData.length > 0) {
-    sortedCatData = sortedCatData.sort((a, b) => {
-      const nameA = a.breeds[0].name.toLowerCase();
-      const nameB = b.breeds[0].name.toLowerCase();
-
-      if (sortOrder === "asc") {
-        return nameA.localeCompare(nameB);
-      } else {
-        return nameB.localeCompare(nameA);
-      }
-    });
+    try {
+      sortedCatData = sortedCatData.sort((a, b) => {
+        const nameA = a.breeds[0].name.toLowerCase();
+        const nameB = b.breeds[0].name.toLowerCase();
+        if (sortOrder === "asc") {
+          return nameA.localeCompare(nameB);
+        } else {
+          return nameB.localeCompare(nameA);
+        }
+      });
+    } catch (error) {
+      console.error("Error sorting data:", error);
+    }
   }
 
   return (

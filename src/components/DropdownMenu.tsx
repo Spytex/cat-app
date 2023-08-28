@@ -90,7 +90,7 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
             {data.map((option) => (
               <button
                 key={option.id}
-                className={`text-black group flex rounded-md items-center w-full px-2 py-2 text-[16px] ${
+                className={`text-black group flex rounded-md items-center w-full px-2 py-2 text-[16px] hover:bg-gray-100 ${
                   option.name === selected ? "bg-gray-100" : ""
                 }`}
                 onClick={() => {
