@@ -87,8 +87,9 @@ const OneBreedContent: React.FC = () => {
       ) : (
         <React.Fragment>
           <ImageCarousel catData={catData} catImageURL={catImageURL} />
+          <div className="pb-[10px]"/>
           {catData && catData.length > 0 && (
-            <div className="flex relative flex-col border-[2px] border-pink-100 rounded-[20px] top-[51px]">
+            <div className="flex relative flex-col border-[2px] border-pink-100 rounded-[20px]">
               <div className="flex items-center flex-col">
                 <p className="relative absolute justify-center bg-white px-[40px] py-[5px] rounded-[20px] text-[36px] font-medium text-black mt-[-32px]">
                   {catData[0].breeds[0].name}
