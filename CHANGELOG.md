@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/Spytex/cat-app/compare/v0.1.2...v0.1.3) (2023-08-28)
+
+
+### Bug Fixes
+
+* Updated Search component. Cleaned files from useless components. feat: Added functionality to search by breed name. ([e3d8efc](https://github.com/Spytex/cat-app/commit/e3d8efc96a2a906637d2f35356c6c54e0d54a5d7))
+
 ### [0.1.2](https://github.com/Spytex/cat-app/compare/v0.1.1...v0.1.2) (2023-08-28)
 
 ### 0.1.1 (2023-08-27)
