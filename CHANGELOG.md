@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/Spytex/cat-app/compare/v0.1.5...v0.2.0) (2024-01-09)
+
+
+### Features
+
+* Updated and implemented components. Created provider context. Added dark mode, screen sizes and license. Updated README.md. ([4d51795](https://github.com/Spytex/cat-app/commit/4d51795810c93472cd9427741b8ed62a6c0b1e8c))
+
+
+### Bug Fixes
+
+* fixed OneBreedContent component ([096a19a](https://github.com/Spytex/cat-app/commit/096a19ab1b7b5b4a9c00c2fd187fdf67d3e63ab1))
+
 ### [0.1.5](https://github.com/Spytex/cat-app/compare/v0.1.4...v0.1.5) (2023-08-28)
 
 
