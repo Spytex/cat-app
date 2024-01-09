@@ -36,7 +36,7 @@ const OneBreedContent: React.FC = () => {
           height="h-[40px]"
           width="w-[40px]"
           rounded="rounded-[10px]"
-          defaultBgColor="bg-pink-100"
+          defaultBgColor="bg-pink-100 dark:bg-pink-200 dark:bg-opacity-20"
           onClick={() => router.back()}
         >
           <svg
@@ -64,7 +64,7 @@ const OneBreedContent: React.FC = () => {
           fontWeight="font-medium"
           fontSize="text-[20px]"
           leading="leading-[30px]"
-          defaultBgColor="bg-pink-100"
+          defaultBgColor="bg-pink-100 dark:bg-pink-200 dark:bg-opacity-20"
         >
           BREEDS
         </LinkButton>
@@ -87,11 +87,11 @@ const OneBreedContent: React.FC = () => {
       ) : (
         <React.Fragment>
           <ImageCarousel catData={catData} catImageURL={catImageURL} />
-          <div className="pb-[10px]"/>
+          <div className="pb-[10px]" />
           {catData && catData.length > 0 && (
-            <div className="flex relative flex-col border-[2px] border-pink-100 rounded-[20px]">
+            <div className="flex relative flex-col border-[2px] border-pink-100 dark:border-pink-200 dark:border-opacity-20 rounded-[20px]">
               <div className="flex items-center flex-col">
-                <p className="relative absolute justify-center bg-white px-[40px] py-[5px] rounded-[20px] text-[36px] font-medium text-black mt-[-32px]">
+                <p className="relative absolute justify-center bg-white dark:bg-gray-300 px-[40px] py-[5px] rounded-[20px] text-[36px] font-medium text-black dark:text-white mt-[-32px]">
                   {catData[0].breeds[0].name}
                 </p>
                 <p className="text-[20px] font-medium text-gray-200 flex justify-center max-w-[600px] text-center">
@@ -100,7 +100,7 @@ const OneBreedContent: React.FC = () => {
               </div>
               <div className="flex flex-row mt-[20px]">
                 <div className="flex flex-col mx-[40px] max-w-[270px]">
-                  <p className="text-[16px] font-medium text-black">
+                  <p className="text-[16px] font-medium text-black dark:text-white">
                     Temperament:
                   </p>
                   <p className="text-[16px] font-normal text-gray-200">
@@ -108,19 +108,19 @@ const OneBreedContent: React.FC = () => {
                   </p>
                 </div>
                 <div className="flex flex-col mx-[20px] max-w-[270px] pb-[40px]">
-                  <p className="text-[16px] font-medium text-black">
+                  <p className="text-[16px] font-medium text-black dark:text-white">
                     Origin:{" "}
                     <span className="text-[16px] font-normal text-gray-200">
                       {catData[0].breeds[0].origin}
                     </span>
                   </p>
-                  <p className="text-[16px] font-medium text-black">
+                  <p className="text-[16px] font-medium text-black dark:text-white">
                     Weight:{" "}
                     <span className="text-[16px] font-normal text-gray-200">
                       {catData[0].breeds[0].weight.metric} kgs
                     </span>
                   </p>
-                  <p className="text-[16px] font-medium text-black">
+                  <p className="text-[16px] font-medium text-black dark:text-white">
                     Life span:{" "}
                     <span className="text-[16px] font-normal text-gray-200">
                       {catData[0].breeds[0].life_span} years

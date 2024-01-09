@@ -6,6 +6,7 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: ["class"],
   theme: {
     extend: {
       colors: {
@@ -21,9 +22,14 @@ const config: Config = {
         'gray': {
           100: '#F8F8F7',
           200: '#8C8C8C',
+          300: '#282828',
         },
       },
     },
+    screens: {
+			tablet: { max: "1439px" },
+			mobile: { max: "767px" },
+		},
   },
   plugins: [],
 }

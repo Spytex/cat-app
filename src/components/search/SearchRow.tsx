@@ -4,6 +4,7 @@ import React from "react";
 import Search from "./Search";
 import { usePathname } from "next/navigation";
 import MenuButton from "../buttons/sideMenu/MenuButton";
+import Button from "../buttons/Button";
 
 const SearchRow: React.FC = () => {
   const pathname = usePathname();
@@ -66,14 +67,30 @@ const SearchRow: React.FC = () => {
   ];
 
   return (
-    <div className="flex flex-row space-x-[10px]">
-      <div className="w-[470px]">
+    <div className="flex flex-row gap-[10px] ">
+      <div className="hidden tablet:flex ">
+        {" "}
+        {/*change*/}
+        <Button
+          width="w-[60px]"
+          height="h-[60px]"
+          rounded="rounded-[20px]"
+          defaultBgColor="bg-white"
+          onClick={() => {}}
+        >
+          123
+        </Button>
+      </div>
+      <div className="w-full">
         <Search />
       </div>
+
       {navLinks.map(({ name, link, svgPath }) => (
-        <MenuButton key={name} isActive={pathname === link} href={link}>
-          {svgPath}
-        </MenuButton>
+        <div key={name}>
+          <MenuButton isActive={pathname === link} href={link}>
+            {svgPath}
+          </MenuButton>
+        </div>
       ))}
     </div>
   );

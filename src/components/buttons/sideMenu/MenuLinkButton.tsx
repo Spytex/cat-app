@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import React from "react";
 
@@ -29,7 +27,7 @@ const MenuLinkButton: React.FC<ButtonProps> = ({
   return (
     <Link
       className={`${height} ${width} ${rounded} font-medium text-[12px] leading-[16px] tracking-[2px] flex justify-center items-center duration-200 
-      ${!isActive && !isHovered ? "bg-white" : ""}
+      ${!isActive && !isHovered ? "bg-white dark:bg-opacity-10" : ""}
       ${isHovered && !isActive ? "bg-pink-100" : ""} 
       ${
         isActive

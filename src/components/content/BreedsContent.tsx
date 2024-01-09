@@ -48,7 +48,7 @@ const BreedsContent: React.FC = () => {
           height="h-[40px]"
           width="w-[40px]"
           rounded="rounded-[10px]"
-          defaultBgColor="bg-pink-100"
+          defaultBgColor="bg-pink-100 dark:bg-pink-200 dark:bg-opacity-20"
           onClick={() => router.back()}
         >
           <svg

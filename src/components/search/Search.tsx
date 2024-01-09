@@ -48,8 +48,8 @@ const Search: React.FC = () => {
         type="search"
         name="search"
         placeholder="Search for breeds by name"
-        className={`bg-white h-[60px] px-[20px] w-full rounded-[20px] text-[20px] leading-[30px] font-normal border-[2px]
-        ${!isHovered && !isActive ? "border-white placeholder-gray-200" : ""}
+        className={`bg-white dark:bg-gray-300 dark:caret-white h-[60px] px-[20px] w-full rounded-[20px] text-[20px] leading-[30px] font-normal border-[2px]
+        ${!isHovered && !isActive ? "border-transparent placeholder-gray-200" : ""}
         ${isHovered && !isActive ? "border-pink-100 placeholder-white" : ""}
         ${isActive ? "outline-none border-pink-200 placeholder-white" : ""}`}
         onChange={(event) => searchHandler(event)}
@@ -91,7 +91,7 @@ const Search: React.FC = () => {
       <button
         type="submit"
         onClick={() => handleSearch(value)}
-        className="absolute right-0 top-0 mt-[10px] mr-[10px] w-[40px] h-[40px] fill-pink-200 bg-pink-100 flex justify-center items-center rounded-[10px] hover:bg-pink-200 hover:fill-white"
+        className="absolute right-0 top-0 mt-[10px] mr-[10px] w-[40px] h-[40px] fill-pink-200 bg-pink-100 dark:bg-pink-200 dark:bg-opacity-20 flex justify-center items-center rounded-[10px] hover:bg-pink-200 hover:fill-white"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

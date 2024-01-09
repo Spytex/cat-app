@@ -19,7 +19,7 @@ const Button: React.FC<ButtonProps> = ({
   height,
   width,
   rounded,
-  defaultBgColor = "bg-white",
+  defaultBgColor = "bg-white dark:bg-opacity-10",
   hoverBgColor = "bg-pink-200",
   defaultFillColor = "fill-pink-200",
   hoverFillColor = "fill-white",

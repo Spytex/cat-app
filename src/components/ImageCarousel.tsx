@@ -37,11 +37,11 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
 
   return (
     <div
-      id="indicators-carousel"
+      id="image-carousel"
       className="relative w-full"
       data-carousel="static"
     >
-      <div className="relative h-56 overflow-hidden rounded-[20px] md:h-[360px]">
+      <div className="relative h-[360px] overflow-hidden rounded-[20px]">
         {catData.map((data, index) => (
           <div
             key={index}
@@ -62,13 +62,13 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({
           </div>
         ))}
       </div>
-      <div className="absolute z-30 bg-white p-[10px] bottom-[-15px] rounded-[20px] flex space-x-[5px] -translate-x-1/2  left-1/2">
+      <div className="absolute z-30 bg-white dark:bg-gray-300 p-[10px] bottom-[-15px] rounded-[20px] flex space-x-[5px] -translate-x-1/2  left-1/2">
         {catData.map((_, index) => (
           <button
             key={index}
             type="button"
             className={`w-[10px] h-[10px] rounded-full ${
-              index === activeIndex ? "bg-pink-200" : "bg-pink-100"
+              index === activeIndex ? "bg-pink-200" : "bg-pink-100 dark:bg-pink-200 dark:bg-opacity-20"
             }`}
             aria-current={index === activeIndex}
             aria-label={`Slide ${index + 1}`}
